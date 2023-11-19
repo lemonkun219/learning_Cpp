@@ -9,6 +9,8 @@ template<typename T>
 class stack
 {
 public:
+
+	//两个构造函数
 	//获取下一个元素的位置
 	stack():_next(NULL)
 	{
@@ -44,9 +46,9 @@ public:
 	//三个检查错误程序
 	bool full()
 	{
-		if (size != landing->max_size())
+		if (size = landing->max_size())
 			return true;
-		return else;
+		return false;
 	}
 	bool empty()
 	{
@@ -86,6 +88,7 @@ public:
 		return true;
 	}
 
+	//两个删除类函数
 	bool pop()
 	{
 		if (empty())
@@ -93,21 +96,79 @@ public:
 
 		size--;
 		landing->pop_back();
-		reset_next();
 		return check_size();
 	}
-	bool peek();
+	bool peek(T top)
+	{
+		if(empty())
+			return false;
+		top = landing->front();
+		size--;
+		landing->pop_back();
+		return check_size();
+	}
 
-	int push(T e);
+	vector<T>::iterator push(T e)
+	{
+		if(full())
+		{
+			cout<<"这个栈已经满了"<<endl;
+			cerr<<"winning!";
+		}
+		size++;
+		landing->push_back(e);
+		bool test = check_size();
+		
+		return landing->end();
+	}
 
-	T top();
+	//两个查看类函数
+	T top()
+	{
+		if(empty())
+		{
+			cout<<"这个栈是一个空栈！"<<endl;
+			cerr<<"winning";
+		}
+
+		return landing->front();
+	}
 	int get_size()
 	{
 		return size();
 	}
 
-	bool find();
-	int count;
+	//两个功能类函数
+	bool find(T e)
+	{
+		if(empty())
+		{
+			cout<<"这个栈是一个空栈！"<<endl;
+			cerr<<"winning";
+		}
+
+		for(auto const& it:landing)
+		{
+			if(it = e)
+				return true;
+		}
+		
+		return false;
+	}
+	int count(T e)
+	{
+		if(!find(e))
+			cout<<"没有这个元素"<<endl;
+		
+		int i = 0;
+		for(auto const& it:landing)
+		{
+			if(it = e)
+				i++;
+		}
+		
+		return i;
+	}
 
 
 private:
