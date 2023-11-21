@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "*.cpp",
+                "/workspaces/learning_Cpp/main/*.cpp",
                 "-o",
                 "${fileDirname}\\test.exe"
             ],
