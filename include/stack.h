@@ -12,12 +12,13 @@ public:
 
 	//两个构造函数
 	//获取下一个元素的位置
-	stack():_next(NULL)//这种成员表初始化的方式只适用于构造函数
+	stack()
 	{
 		size = 0;
 		landing = new vector<T>();
+		_next = landing->begin();
 	}
-	stack(int& _size = 2)
+	stack(int _size = 2)
 	{
 		//用户确切值判断
 		if (_size < 2)
@@ -29,7 +30,7 @@ public:
 		//初始化设置
 		size = _size;
 		landing = new vector<T>(_size);
-		_next = landing->begin()++;
+		_next = landing->begin() + 1;
 
 		//初始化数据设置
 		int temp = size;
@@ -50,7 +51,7 @@ public:
 	{
 		delete[] landing;
 		landing = new vector<T>();
-		_next = NULL;
+		_next = landing->begin();
 		if(landing)
 			return true;
 		return false;
@@ -68,7 +69,7 @@ public:
 		//初始化设置
 		size = _size;
 		landing = new vector<T>(_size);
-		_next = landing->begin()++;
+		_next = landing->begin() + 1;
 
 		//初始化数据设置
 		int temp = size;
@@ -94,19 +95,19 @@ public:
 	//三个检查错误程序
 	bool full()
 	{
-		if (size = landing->max_size())
+		if (size == landing->max_size())
 			return true;
 		return false;
 	}
 	bool empty()
 	{
-		if(size = 0)
+		if(size == 0)
 			return true;
 		return false;
 	}
 	bool check_size()
 	{
-		if (size = landing->size())
+		if (size == landing->size())
 			return true;
 		return false;
 	}
@@ -114,19 +115,22 @@ public:
 	//关于下一个位置的两个函数
 	typename vector<T>::iterator get_next()const
 	{
-		if(_next == NULL)
-			cerr<<"已经到了最后一个元素！";
+		if(_next == landing.end() + 1)
+		{
+			cout<<"已经到了最后一个元素！已自动返回函数本身";
+			return landing->end();
+		}
 		if (empty())
 			cerr << "请检查是否存在元素！";
-			return _next;
+		return _next;
 	}
 	bool reset_next()const
 	{
 		if(empty())
 			cerr<<"这是一个空的栈！";
 
-		auto it = _next++;
-		if (it = NULL)
+		auto it = _next;
+		if (it == landing->end() + 1)
 		{
 			cout<<"注意！已经到了最后一个元素"<<endl;
 			return false;
@@ -146,7 +150,7 @@ public:
 		landing->pop_back();
 		return check_size();
 	}
-	bool peek(T top)
+	bool peek(T& top)
 	{
 		if(empty())
 			return false;
@@ -197,7 +201,7 @@ public:
 
 		for(auto const& it:landing)
 		{
-			if(it = e)
+			if(it == e)
 				return true;
 		}
 		
@@ -211,7 +215,7 @@ public:
 		int i = 0;
 		for(auto const& it:landing)
 		{
-			if(it = e)
+			if(it == e)
 				i++;
 		}
 		
