@@ -112,7 +112,7 @@ public:
 	}
 
 	//关于下一个位置的两个函数
-	vector<T>::iterator get_next()const
+	typename vector<T>::iterator get_next()const
 	{
 		if(_next == NULL)
 			cerr<<"已经到了最后一个元素！";
@@ -156,7 +156,7 @@ public:
 		return check_size();
 	}
 
-	vector<T>::iterator push(T e)
+	typename vector<T>::iterator push(T e)
 	{
 		if(full())
 		{
@@ -183,7 +183,7 @@ public:
 	}
 	int get_size()
 	{
-		return size();
+		return size;
 	}
 
 	//几个功能类函数
@@ -228,7 +228,7 @@ public:
 
 
 private:
-	mutable vector<T>::iterator _next;
+	mutable typename vector<T>::iterator _next;
 	int size;
 	vector<T>* landing;
 };

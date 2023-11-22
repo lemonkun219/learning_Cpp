@@ -8,7 +8,7 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\test.exe",//需要调试的可执行程序
+            "program": "${fileDirname}/test.exe",//需要调试的可执行程序//最好用斜杠
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
