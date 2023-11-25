@@ -17,7 +17,7 @@ template<typename T> struct BinNode
 	BinNode() { parent = NULL; lc = NULL; rc = NULL; height = 0, npl = 1; color = RB_RED; }		//不构造data的值的原因是data是一个模板类型，无法构造初值
 	BinNode(T d, BinNodePosi(T) p = NULL, BinNodePosi(T) l = NULL, BinNodePosi(T) r = NULL, int h = 0, int n = 1, RBColor c = RB_RED)
 	{
-		data = d; parent = p; lc = c; rc = r; height = h; npl = n; color = c;
+		data = d; parent = p; lc = l; rc = r; height = h; npl = n; color = c;
 	}	//这样构造的理由是可以自由的输入想要定义的变量，不想定义的变量全部交给初始化就可以了
 
 	int size()
