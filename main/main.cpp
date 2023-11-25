@@ -12,7 +12,7 @@ int main()
 	stack<int> st(3);
 	BinNode<int> b;
 	BinNode<int> bi(3);
-	if(st.find(3))
+	if(st.find(2))
 		cout<<"找到了！";
 	else
 		cout<<"没找到";
