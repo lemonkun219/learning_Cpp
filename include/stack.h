@@ -206,6 +206,7 @@ public:
 		{
 			cout<<"这个栈是一个空栈！"<<endl;
 			cerr<<"winning";
+			return false;
 		}
 
 		for(auto const& it:*landing)
