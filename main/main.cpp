@@ -13,9 +13,9 @@ int main()
 	BinNode<int> b;
 	BinNode<int> bi(3);
 	if(st.find(2))
-		cout<<"找到了！";
+		cout<<"找到了！"<<endl;
 	else
-		cout<<"没找到";
+		cout<<"没找到"<<endl;
 
 	return 0;
 }
