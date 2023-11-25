@@ -34,16 +34,23 @@ public:
 
 		//初始化数据设置
 		int temp = size;
+		int i = 0;
 		while (temp--)
 		{
 			T in;
-			int i = 0;
 			i++;
 			cout << "请输入第" << i << "个数据数据" << endl;
-			landing->push_back(cin >> in);
+			cin>>in;
+
+			while(cin.fail())
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				cout<<"请输入一个正确的数值：";
+				cin>>in;
+			}
+			(*landing)[i] = in;
 		}
-		if(_next)
-			cerr<<"winning!";
 	}
 
 	//两个重置函数
@@ -89,7 +96,9 @@ public:
 	//一个析构函数
 	~stack()
 	{
-		delete[] landing;	//delete[]用来释放连续空间，delete用来释放单个空间
+		if(landing)
+			delete landing;	//delete[]用来释放连续空间，delete用来释放单个空间
+							//但是对于vector, list, map这种高级线性结构而言，并不需要用delete[]来释放，在你delete完以后就会自动调用其内置的析构函数完成释放
 	}
 
 	//三个检查错误程序
@@ -199,7 +208,7 @@ public:
 			cerr<<"winning";
 		}
 
-		for(auto const& it:landing)
+		for(auto const& it:*landing)
 		{
 			if(it == e)
 				return true;
