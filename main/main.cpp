@@ -1,8 +1,8 @@
 #include<iostream>
 #include<vector>
-#include"/workspaces/learning_Cpp/include/quenue.h"
-#include"/workspaces/learning_Cpp/include/stack.h"
-#include"/workspaces/learning_Cpp/include/BinNode.h"
+#include"stack.h"
+#include"quenue.h"
+#include"BinNode.h"
 
 using namespace std;
 
