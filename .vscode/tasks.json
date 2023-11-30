@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",           //设置g++输出中的颜色以增强可读性
                 "-g",                                   //生成调试信息
-                "/workspaces/learning_Cpp/main/*.cpp",  //要编译的源文件路径，通配符表示编译所有.cpp文件
+                "learning_Cpp/main/*.cpp",              //要编译的源文件路径，通配符表示编译所有.cpp文件
                 "-o",                                   //指定输出文件的选项
                 "${fileDirname}/test.exe"               //指定输出文件的路径，${fileDirname} 表示当前文件所在的目录，同时test.exe代表着名称
                                                         //也就是说，编译你选中的文件，编译完放在那个文件夹下
