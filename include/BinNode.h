@@ -14,11 +14,10 @@ template<typename T> struct BinNode
 	int npl;		//左式堆，相比一般的堆多了npl结构，即到单孩子或叶节点的最短距离，最关键的功能是合并，其合并可以说相当简单;
 	RBColor color;	//红黑树
 
-	BinNode() { parent = NULL; lc = NULL; rc = NULL; height = 0, npl = 1; color = RB_RED; }		//不构造data的值的原因是data是一个模板类型，无法构造初值
+	BinNode():parent(NULL), lc(NULL), rc(NULL), height(0), npl(1), color(RBColor){}
 	BinNode(T d, BinNodePosi(T) p = NULL, BinNodePosi(T) l = NULL, BinNodePosi(T) r = NULL, int h = 0, int n = 1, RBColor c = RB_RED)
-	{
-		data = d; parent = p; lc = l; rc = r; height = h; npl = n; color = c;
-	}	//这样构造的理由是可以自由的输入想要定义的变量，不想定义的变量全部交给初始化就可以了
+	:data(d), parent(p), lc(lc), rc(rc), height(h), npl(l), color(c){}	//这样构造的理由是可以自由的输入想要定义的变量，不想定义的变量全部交给初始化就可以了
+//使用成员逐一初始化列表的方式进行构建，使template可以适用于任何类型
 
 	int size()
 	{
@@ -148,7 +147,58 @@ template<typename T> struct BinNode
 
 	bool operator< (BinNode const& bn) { return data < bn.data; }
 	bool operator== (BinNode const& bn) { return data == bn.data; }
+
+//BinNode状态判断
+	int IsRoot(BinNode const& bn)
+	{
+		if(bn.parent == NULL)
+			return 1;
+		else
+			return 0;
+	}
+	int IsLchild(BinNode const& bn)
+	{
+		if(!bn.parent == NULL)
+			return 0;
+		else if(bn.parent->lc == bn)
+			return 1;
+	}
+	int IsRchild(BinNode const& bn)
+	{
+		if(!bn.parent == NULL)
+			return 0;
+		else if(bn.parent->rc == bn)
+			return 1;
+	}
+	bool Ischild_cut()
+	{
+		if(this->IsRoot())
+			return flase;
+		if(this->parent->lc == this)
+		{
+			this->parent->lc = NULL;
+			return true;
+		}	
+		if(this->parent->rc == this)
+		{
+			this->parent->rc = NULL;
+			return true;
+		}
+	}
+	int Hasparent(){return IsRoot(this);}
+	int HasLchild(){return lc;}	
+	int HasRchild(){return rc;}
+	int Haschild(){return lc || rc;}
+	int HasBothchild(){return lc && rc;}
+	int IsLeaf(){return this->Haschild;}	
+	int sib(){return IsLchild ? parent->rc : parent->lc;}
+	BinNodePosi(T) fromparent(){return parent;}
+	int uncle(){return this->parent->IsLchild() ? parent->parent->rc : parent->parent->lc;}
+	
+
 };
+
+
 
 
 //template<typename T, typename VST>//先序遍历递归版算法示例
