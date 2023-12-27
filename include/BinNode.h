@@ -170,15 +170,30 @@ template<typename T> struct BinNode
 		else if(bn.parent->rc == bn)
 			return 1;
 	}
-	int Hasparent(BinNode const& bn){return IsRoot(bn);}
-	int HasLchild(BinNode const& bn){return bn.lc;}	
-	int HasRchild(BinNode const& bn){return bn.rc;}
-	int Haschild(BinNode const& bn){return bn.lc || bn.rc;}
-	int HasBothchild(BinNode const& bn){return bn.lc && bn.rc;}
-	int IsLeaf(BinNode const& bn){return bn.Haschild;}	
-	int sib(BinNode const& bn){return bn.IsLchild ? bn.parent->rc : bn.parent->lc;}
-	int uncle(BinNode const& bn){return IsLchild(bn.parent) ? bn.parent->parent->rc : bn.parent->parent->lc;}
-	BinNodePosi(T) fromparent(BinNode const& bn){return bn.parent;}
+	bool Ischild_cut()
+	{
+		if(this->IsRoot())
+			return flase;
+		if(this->parent->lc == this)
+		{
+			this->parent->lc = NULL;
+			return true;
+		}	
+		if(this->parent->rc == this)
+		{
+			this->parent->rc = NULL;
+			return true;
+		}
+	}
+	int Hasparent(){return IsRoot(this);}
+	int HasLchild(){return lc;}	
+	int HasRchild(){return rc;}
+	int Haschild(){return lc || rc;}
+	int HasBothchild(){return lc && rc;}
+	int IsLeaf(){return this->Haschild;}	
+	int sib(){return IsLchild ? parent->rc : parent->lc;}
+	BinNodePosi(T) fromparent(){return parent;}
+	int uncle(){return this->parent->IsLchild() ? parent->parent->rc : parent->parent->lc;}
 	
 
 };
